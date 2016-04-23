@@ -1,16 +1,18 @@
 #! /usr/bin/env python
 
-from SimpleCV import Camera, Display, Image
+from SimpleCV import Camera, Display, Image, matplotlib
 import pylab as plt
+import numpy as np
+import cv2
 
 c = Camera()
 img = c.getImage()
 img.save("PDI-image-n.png")
 img.show()
-imgGray = img.grayscale()  %transforma la imagen a escala de grises
-imgGray.save("grayImage.jpg") %guarda la nueva imagen
-imgGray.show() %muestra la nueva imagen
-hist = imgGray.histogram() %hace un histograma con los valores de intensidad por pixel de la imagen recien generada
-plt.plot(hist) %%muestra la imagen del histograma
-
-
+img = cv2.imread('PDI-image-n.png')
+color = ('b','g','r')
+for i,col in enumerate(color):
+histr = cv2.calcHist([img],[i],None,[256],[0,256])
+plt.plot(histr,color = col)
+plt.xlim([0,256])
+plt.show()
