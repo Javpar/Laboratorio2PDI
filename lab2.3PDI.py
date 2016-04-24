@@ -12,7 +12,7 @@ img.show()
 img = cv2.imread('PDI-image-n.png')
 color = ('b','g','r')
 for i,col in enumerate(color):
-histr = cv2.calcHist([img],[i],None,[256],[0,256])
+histr = cv2.calcHist([img],[i],None,[256],[0,256])  //no debería ir de 0 a 255?
 plt.plot(histr,color = col)
 plt.xlim([0,256])
 plt.show()
